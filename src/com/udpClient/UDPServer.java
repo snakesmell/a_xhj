@@ -84,7 +84,7 @@ public class UDPServer {
 				if((data[8]==(byte) (0x81 & 0xff))&&(data[9]==(byte) (0x01 & 0xff))) {
 					System.out.println("NET write:信号机联机请求-1:"+bth);
 					//84 01 - 4.1.2 上位机应答
-					String command="c0 10 20 10 01 00 01 00 84 01 00 00 00 00 00 78 7a 32 31 30 30 00 c0"; System.out.println("datehart:上位机联机应答-1:"+command);
+					String command="c0 10 20 10 01 00 01 00 84 01 01 00 00 00 00 78 7a 32 31 30 30 00 c0"; System.out.println("datehart:上位机联机应答-1:"+command);
 					byte[] response = CommandHex.hexStringToByte(command);
 					DatagramPacket packet2 = new DatagramPacket(response, response.length, address, 17899);
 					socket.send(packet2);
@@ -105,6 +105,13 @@ public class UDPServer {
 				if((data[8]==(byte) (0x82 & 0xff))&&(data[9]==(byte) (0x04 & 0xff))) {
 					receiveName="灯色状态主动上传-3";
 					System.out.println("NET write:"+receiveName+":"+bth);
+					
+					String temp = Integer.toHexString(Integer.parseInt(String.valueOf( data[15] & 0xff )));
+//					System.out.println(temp);
+					
+					String bits = byteToBitStr(data[15]);
+					System.out.println(bits);
+					signLight(bits);
 					continue;
 				}
 				
@@ -151,4 +158,41 @@ public class UDPServer {
             }
             return sb.toString().toUpperCase();
     }
+    //字节转bit
+    public static String byteToBitStr(byte by) {
+	    StringBuffer sb = new StringBuffer();
+	    //每一位与 000000001按位与运算。保证每一位是 0或者1
+	    sb.append((by>>7)&0x1);
+	    sb.append((by>>6)&0x1);
+	    sb.append((by>>5)&0x1);
+	    sb.append((by>>4)&0x1);
+	    sb.append((by>>3)&0x1);
+	    sb.append((by>>2)&0x1);
+	    sb.append((by>>1)&0x1);
+	    sb.append((by>>0)&0x1);
+	    return sb.toString();
+	}
+    //灯色
+    public static void signLight(String temp) {
+		String t1=temp.substring(0, 2);
+		String t2=temp.substring(2, 4);
+		String t3=temp.substring(4, 6);
+		String t4=temp.substring(6, 8);
+		
+		String []a1= {"00","01","10","11"};
+		String []b1= {"不亮","红","黄","绿"};
+		for(int i=0;i<4;i++) {
+			if(a1[i].equals(t1)) { System.out.print(" 1-"+b1[i]); }
+		}
+		for(int i=0;i<4;i++) {
+			if(a1[i].equals(t2)) { System.out.print(" 2-"+b1[i]); }
+		}
+		for(int i=0;i<4;i++) {
+			if(a1[i].equals(t3)) { System.out.print(" 3-"+b1[i]); }
+		}
+		for(int i=0;i<4;i++) {
+			if(a1[i].equals(t4)) { System.out.println(" 4-"+b1[i]); }
+		}
+		
+	}
 }
