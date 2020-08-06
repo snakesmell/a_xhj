@@ -1,14 +1,67 @@
 package com.upttest;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import com.udpUtil.CommandHex;
+
 public class Test {
 	public static void main(String[] args) {
+		
+		int tmp = 129&0xff;
+        String tmpStr = Integer.toHexString(tmp);
+		System.out.println(tmpStr);
+		
 //		byte b=77;
 //		String result = byteToBitStr(b);
 //		System.out.println(result);
 		
 //		 String h = Integer.toHexString(119);
 //		System.out.println(h);
-		signLight("11011101");
+//		signLight("11011101"); 31 31 31  41 1C 2A 5F  00 C0 
+		
+		int a=CommandHex.hexTool("41");		 
+		int b=CommandHex.hexTool("1c");
+		int c=CommandHex.hexTool("2a");
+		int d=CommandHex.hexTool("5f");
+		
+		int sum=a+b*256+c*256*256+d*256*256*256;
+//		System.out.println(a+b*256+c*256*256+d*256*256*256);
+		
+//		19700101
+		
+		Calendar cal = Calendar.getInstance();
+		System.out.println(cal.getTime());
+		
+		cal.set(1970, 00, 01,0,0,0);
+		cal.add(Calendar.SECOND, sum);
+		System.out.println(cal.getTime());
+		
+//		System.out.println(cal.getTimeInMillis());
+
+//		Date date = cal.getTime();
+//		System.out.println(date);
+//		System.out.println(date.getTime());
+		
+		
+//		cal.setTimeInMillis(sum);
+		
+//		System.out.println(cal.getTime());
+		
+		
+		
+		
+//		int time= sum;//秒
+//        GregorianCalendar gc = new GregorianCalendar();
+//        gc.setTimeInMillis(time * 1000);
+//        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        System.out.print( format.format(gc.getTime()));
+//		
+//        Date time = new Date(sum);
+//        
+//        System.out.println(time);
+//		System.out.println(sum/60/60/24/365);
+		 
 	}
 	
 	

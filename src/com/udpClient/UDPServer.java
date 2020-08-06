@@ -108,10 +108,20 @@ public class UDPServer {
 					
 					String temp = Integer.toHexString(Integer.parseInt(String.valueOf( data[15] & 0xff )));
 //					System.out.println(temp);
+					String bits="";
 					
-					String bits = byteToBitStr(data[15]);
-					System.out.println(bits);
+					bits = byteToBitStr(data[15]);
+//					System.out.print(bits);
 					signLight(bits);
+					
+					bits = byteToBitStr(data[16]);
+//					System.out.print(bits);
+					signLight(bits);
+					
+					bits = byteToBitStr(data[17]);
+//					System.out.print(bits);
+					signLight(bits);
+					System.out.println();
 					continue;
 				}
 				
@@ -182,16 +192,16 @@ public class UDPServer {
 		String []a1= {"00","01","10","11"};
 		String []b1= {"不亮","红","黄","绿"};
 		for(int i=0;i<4;i++) {
-			if(a1[i].equals(t1)) { System.out.print(" 1-"+b1[i]); }
+			if(a1[i].equals(t1)) { System.out.print(" -"+b1[i]); }
 		}
 		for(int i=0;i<4;i++) {
-			if(a1[i].equals(t2)) { System.out.print(" 2-"+b1[i]); }
+			if(a1[i].equals(t2)) { System.out.print(" -"+b1[i]); }
 		}
 		for(int i=0;i<4;i++) {
-			if(a1[i].equals(t3)) { System.out.print(" 3-"+b1[i]); }
+			if(a1[i].equals(t3)) { System.out.print(" -"+b1[i]); }
 		}
 		for(int i=0;i<4;i++) {
-			if(a1[i].equals(t4)) { System.out.println(" 4-"+b1[i]); }
+			if(a1[i].equals(t4)) { System.out.print(" -"+b1[i]); }
 		}
 		
 	}
