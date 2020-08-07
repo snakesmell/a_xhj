@@ -22,7 +22,7 @@ public class UDPClient {
 			}
 		
     	
-		 String command="c0 10 20 10 03 00 01 00 80 09 00 00 00 00 00 00 c0"; 
+		 String command="c0 10 20 10 03 00 01 00 80 23 00 00 00 00 00 00 c0"; 
 //		 String command="C0 10 10 20 03 00 01 00 83 09 31 31 31 31 31 01 01 FE 1F BE FE FF FF FF 01 00 00 00 00 C0 "; 
 		 
 		 
