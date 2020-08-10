@@ -12,7 +12,6 @@ import com.udpUtil.CommandHex;
  */
 public class UDPClient {
     public static void main(String[] args) throws IOException {
-    	
 		for(int i=0;i<1;i++) {
 			try {
 				Thread.sleep(1000);

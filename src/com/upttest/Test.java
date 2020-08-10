@@ -8,6 +8,9 @@ import com.udpUtil.CommandHex;
 public class Test {
 	public static void main(String[] args) {
 		
+		
+		
+		
 		int tmp = 129&0xff;
         String tmpStr = Integer.toHexString(tmp);
 		System.out.println(tmpStr);
