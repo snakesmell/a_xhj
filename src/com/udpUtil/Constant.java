@@ -23,4 +23,5 @@ public class Constant {
 	public static String param18="param18";
 	public static String param19="param19";
 	
+	public static String phase="phase";//相位
 }

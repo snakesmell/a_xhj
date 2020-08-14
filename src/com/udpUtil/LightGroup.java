@@ -15,12 +15,12 @@ public class LightGroup {
 		for(int i=0;i<s15;i++){
 			String sb="";
 			int n1=CommandHex.hexTool(s[15+12*i+1]);//编号
-			int n3=CommandHex.hexTool(s[15+12*i+1]);//相位
+			int n3=CommandHex.hexTool(s[15+12*i+3]);//相位
 			int n6=CommandHex.hexTool(s[15+12*i+6]);//方向
 			int n9=CommandHex.hexTool(s[15+12*i+8]);//类型
 //			System.out.print(n1+"-");
 			sb+=(n1+"-");//编号
-			sb+=(n1+"-");//相位
+			sb+=(n3+"-");//相位
 			String f=fx[n6];
 //			System.out.print(f+"-");
 			sb+=(f+"-");//方向

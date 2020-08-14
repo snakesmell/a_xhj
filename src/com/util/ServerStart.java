@@ -88,7 +88,7 @@ public  class ServerStart extends HttpServlet{
 												String[] gs = group.split("-");
 												int gi=Integer.parseInt(gs[0]); 
 												gi=gi-1;
-												listColor.add(ct[gi]+"-"+gs[2]+"-"+gs[3]);
+												listColor.add(ct[gi]+"-"+gs[2]+"-"+gs[3]+"-"+gs[1]);
 											}
 											listColor.add(ip+":"+port);
 											application.setAttribute(Constant.param2,listColor);
@@ -121,7 +121,7 @@ public  class ServerStart extends HttpServlet{
 												String[] gs = group.split("-");
 												int gi=Integer.parseInt(gs[0]); 
 												gi=gi-1;
-												listColor.add(ct[gi]+"-"+gs[2]+"-"+gs[3]);
+												listColor.add(ct[gi]+"-"+gs[2]+"-"+gs[3]+"-"+gs[1]);
 											}
 											listColor.add(ip+":"+port);
 											application.setAttribute(Constant.param2,listColor);

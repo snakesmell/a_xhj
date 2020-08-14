@@ -15,7 +15,18 @@ public class CommandHex {
 		return bs;
 //		System.out.println(bs);
 	}
-	
+	//十进制转16进制字符串
+	public static String intToHex(int n) {
+        StringBuffer s = new StringBuffer();
+        String a;
+        char []b = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        while(n != 0){
+            s = s.append(b[n%16]);
+            n = n/16;            
+        }
+        a = s.reverse().toString();
+        return a;
+    }
 	//16进制字符串转整数
 	public static int hexTool(String hex) {
 		

@@ -4,17 +4,36 @@ public class Test {
 	
 	public static void main(String[] args) {
 		
-		 byte []b=new byte[1024];
-		 String command="c0 10 20 10 01 00 01 00 84 01 00 00 00 00 00 78 7a 32 31 30 30 00 c0";
-		 
-		 String[] sp = command.split(" ");
-		 for(int i=0;i<sp.length;i++) {
-			 sp[i]=sp[i];
-			 byte[] xx = hexStringToByte(sp[i]);
-			 System.out.println(xx[0]);
-			 b[i]=xx[0];
-		 }
+		int x=0x11;
+		System.out.println(x+1);
+		String hex = intToHex(x+1);
+		System.out.println(hex);
+//		 byte []b=new byte[1024];
+//		 String command="c0 10 20 10 01 00 01 00 84 01 00 00 00 00 00 78 7a 32 31 30 30 00 c0";
+//		 
+//		 String[] sp = command.split(" ");
+//		 for(int i=0;i<sp.length;i++) {
+//			 sp[i]=sp[i];
+//			 byte[] xx = hexStringToByte(sp[i]);
+//			 System.out.println(xx[0]);
+//			 b[i]=xx[0];
+//		 }
 	}
+	
+	private static String intToHex(int n) {
+        StringBuffer s = new StringBuffer();
+        String a;
+        char []b = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        while(n != 0){
+            s = s.append(b[n%16]);
+            n = n/16;            
+        }
+        a = s.reverse().toString();
+        return a;
+    }
+
+	
+	
 	//方法调用
 	public byte [] commoand(String command) {
 		 byte []b=new byte[1024];
