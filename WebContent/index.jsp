@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"    pageEncoding="utf-8"%>
-<%@ page import="java.lang.*" %>
+<%@ page import="java.lang.*,com.udpUtil.*,java.util.*" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://"
@@ -13,6 +14,14 @@ String basePath = request.getScheme() + "://"
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<style type="text/css">
+	td{
+		width: 300px;
+		height: 150px;
+		border-style: solid;
+	}
+
+</style>
 </head>
 <body>
 	<select class="t1">
@@ -37,11 +46,25 @@ String basePath = request.getScheme() + "://"
 		<option value="19">工作方式查询</option>
 	</select>
 	<button onclick="show()">操作</button>
+	<br>
+	<label>信号机实时灯态</label><label class="xhj_address"></label>
+	<div id="param2">
+		<table style="border-style: solid;">
+			<tr>
+				<td class="north_west"></td>  <td class="north"></td>   <td class="north_east"></td>
+			</tr>
+			<tr>
+				<td class="west"></td> 		  <td></td> 				<td class="east"></td>
+			</tr>
+			<tr>
+				<td class="sourth_west"></td> <td class="sourth"></td>  <td class="sourth_east"></td>
+			</tr>
+		</table>
+	</div>
 </body>
 <script>
 $(document).ready(function(){
 });
-
 
 function show(){
 	 $.ajax({
@@ -52,5 +75,106 @@ function show(){
 	});
 }
 
+setInterval(function(){ 
+	$.ajax({
+        type:'get',
+        url : '<%=basePath%>/ColorAction',
+        //data :{COMMAND:$(".t1").val()},        
+        success  : function(data) {
+        	var msg=data.substring(0,data.length-1);
+        	console.log(msg); 
+        	var sp=msg.split("*");
+        	$(".sourth").html("");
+        	$(".east").html("");
+        	$(".west").html("");
+        	$(".north").html("");
+        	$(".north_east").html("");
+        	$(".sourth_east").html("");
+        	$(".north_west").html("");
+        	$(".sourth_west").html("");
+        	
+        	$(".xhj_address").html(sp[sp.length-1]);
+			console.log(sp);        	
+        	for(var i=0;i<sp.length-1;i++){
+        		var sub=sp[i].split("-");
+        		switch (sub[1]) {
+	        	    case "东":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".east").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".east").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".east").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".east").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+	        	    	}
+	        	        break;
+	        	    case "南":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".sourth").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".sourth").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".sourth").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".sourth").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	         break;
+	        	    case "西":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".west").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".west").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".west").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".west").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	         break;
+	        	    case "北":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".north").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".north").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".north").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".north").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	         break;
+	        	    case "东北":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".north_east").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".north_east").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".north_east").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".north_east").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	         break;
+	        	    case "东南":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".sourth_east").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".sourth_east").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".sourth_east").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".sourth_east").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	         break;
+	        	    case "西北":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".north_west").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".north_west").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".north_west").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".north_west").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	        break;
+	        	    case "西南":
+	        	    	
+	        	    	switch (sub[0]) {
+	        	    		case "红": $(".sourth_west").append("<label style=\"color: red;\">"+sub[2]+"</label></br>");break;
+		        	   	 	case "黄": $(".sourth_west").append("<label style=\"color: yellow;\">"+sub[2]+"</label></br>");break;
+			        	   	case "绿": $(".sourth_west").append("<label style=\"color: green;\">"+sub[2]+"</label></br>");break;
+			        	   	case "不亮": $(".sourth_west").append("<label style=\"color: gray;\">"+sub[2]+"</label></br>");break;
+        	    		}
+	        	        break;
+        		} 
+        	}
+        	
+        }
+	});
+}, 1000);
 </script>
 </html>
